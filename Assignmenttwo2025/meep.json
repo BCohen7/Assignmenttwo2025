@@ -74,41 +74,7 @@
                     "type": "geoshape",
                     "fill": "#e6baba"
                   }
-        },
-        {"data": {
-            "url": "https://raw.githubusercontent.com/BCohen7/assignment/refs/heads/main/assignmenttwo/data/stateslong.csv"
-          },
-            "transform": [
-              {
-                "lookup": "States",
-                "from": {
-                  "data": {
-                    "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/blob/main/Assignmenttwo2025/js/MapOfAustralia.json",
-                    "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA94"}
-                  },
-                  "key": "properties.STE_NAME21"
-              },
-              "as": "geo"
-            },
-            {
-              "filter": "datum.TopX == XSelect"
-            }
-            ],
-            "mark": {"type": "geoshape","stroke": "#ecb5b5","strokeWidth": 0.5},
-            "encoding": {
-              "shape": {"field": "geo", "type": "geojson"},
-              "color": {
-                "field": "Amount",
-                "type": "quantitative",
-                "scale": {"type": "linear", "domainMax":{"expr":"data('TopX')[0]"}, "domainMin": -1, "scheme": "greens"},
-                "legend": null
-              },
-              "tooltip": [
-                {"field": "States", "type": "nominal", "title": "State"},
-                {"field": "Amount", "type": "quantitative", "title": "Amount"}
-              ]
-            }
-          },
+        }
           {
             "data": {
               "url": "https://raw.githubusercontent.com/BCohen7/assignment/refs/heads/main/assignmenttwo/data/courses.csv"},
@@ -129,64 +95,6 @@
               "tooltip": [{"field": "Course", "type": "nominal", "title": "Course"}, {"field": "Rank", "type": "quantitative"}]
             }
           }]
-    },
-    {
-        "height": 400,
-        "width": 500,
-        "data": {"url": "https://raw.githubusercontent.com/BCohen7/assignment/refs/heads/main/assignmenttwo/data/courses.csv"},
-        "layer": [
-            {
-                "mark": {"type": "bar", "opacity": 1, "width": {"band": 0.8}, "cornerRadiusTopRight": 20, "cornerRadiusBottomRight": 20},
-                "title": {"text": "BY STATE:", "align": "left","fontSize": 24, "color": "#791010"},
-                "transform": [{
-                            "filter": {
-                                "field": "Rank",
-                                "lte": {"expr": "XSelect"}
-                            }
-                        },
-                    {
-                        "aggregate": [{
-                            "op": "count",
-                            "as": "myCount",
-                            "field": "Shorthand"
-                        }],
-                        "groupby": ["Shorthand"]
-                    }],
-                "encoding": {
-                    "y": {"field": "Shorthand", "type": "nominal","title": null, "axis": {"tickOpacity": 0, "domain": false, "labelFontSize": 18, "labelFontStyle": "bold", "labelPadding": 24}},
-                    "x": {"field": "myCount", "type": "quantitative", "title": null, "axis": {"labels": false, "grid": false, "tickOpacity": 0, "domain": false, "orient": "bottom"}},
-                    "color": {
-                    "field": "TopX", "type": "nominal",
-                    "scale": {"range": ["#107937"]},
-                    "legend": null
-                }
-                    }
-                },
-                {
-                        "mark": {"type": "text", "align": "right", "dx": -8, "fontSize": 20, "fontWeight": "bold", "color": "#ecb5b5"},
-                        "transform": [{
-                            "filter": {
-                                "field": "Rank",
-                                "lte": {"expr": "XSelect"}
-                            }
-                        },
-                        {
-                            "aggregate": [{
-                                "op": "count",
-                                "as": "myCount",
-                                "field": "Shorthand"
-                            }],
-                        "groupby": ["Shorthand"]
-                    }],
-                        "encoding": {"text": {"field": "myCount"}, "x": {"field": "myCount", "type": "quantitative"}, "y": {"field": "Shorthand"}}
-                    },
-                {
-                    "mark": {"type": "bar", "opacity": 0},
-                    "encoding": {
-                        "y": {"field": "Shorthand", "title": null, "axis": {"tickOpacity": 0, "domain": false, "labelFontSize": 18, "labelFontStyle": "bold", "labelPadding": 24}}
-                    }
-                }
-        ]
     }
     ]
         },
