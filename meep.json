@@ -1,0 +1,117 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "params":[
+      {
+        "name": "State_Select",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Victoria",
+            "New South Wales",
+            "Queensland",
+            "Western Australia",
+            "South Australia",
+            "Tasmania",
+            "Australian Capital Territory"
+          ],
+          "labels": [
+            "Show all",
+            "Victoria",
+            "New South Wales",
+            "Queensland",
+            "Western Australia",
+            "South Australia",
+            "Tasmania",
+            "Australian Capital Territory"
+          ],
+          "name": "State: "
+        }
+      },
+      {
+        "name": "XSelect",
+        "value": 100,
+        "bind": {
+          "input": "select",
+          "options": [
+            100,
+            100,
+            50,
+            25,
+            10
+          ],
+          "labels": [
+            "Show All",
+            "Top 100",
+            "Top 50",
+            "Top 25",
+            "Top 10"
+          ],
+          "name": "Range to view: "
+        }
+      }
+    ],
+    "data": {
+          "url":
+          "https://raw.githubusercontent.com/BCohen7/assignment/refs/heads/main/assignmenttwo/js/MapOfAustralia.json",
+          "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA94"}
+        },
+        "spacing": 50,
+        "padding": 0,
+
+    "vconcat": [
+        {
+            "center": true,
+            "bounds": "full",
+    "hconcat": [{
+        "projection": {"type": "equirectangular"},
+        "title": {"text": "Which flight routes are busiest?", "align": "center","fontSize": 24, "color": "#791010"},
+        "height": 400,
+        "width": 400,
+        "layer": [
+            {
+                "mark": {
+                    "type": "geoshape",
+                    "fill": "#e6baba"
+                  }
+        },
+        {"data": {
+            "url": "https://raw.githubusercontent.com/BCohen7/assignment/refs/heads/main/assignmenttwo/data/stateslong.csv"
+          },
+            "transform": [
+              {
+                "lookup": "States",
+                "from": {
+                  "data": {
+                    "url": "https://raw.githubusercontent.com/BCohen7/assignment/refs/heads/main/assignmenttwo/js/MapOfAustralia.json",
+                    "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA94"}
+                  },
+                  "key": "properties.STE_NAME21"
+              },
+              "as": "geo"
+            },
+            {
+              "filter": "datum.TopX == XSelect"
+            }
+            ],
+            "mark": {"type": "geoshape","stroke": "#ecb5b5","strokeWidth": 0.5},
+            "encoding": {
+              "shape": {"field": "geo", "type": "geojson"},
+              "color": {
+                "field": "Amount",
+                "type": "quantitative",
+                "scale": {"type": "linear", "domainMax":{"expr":"data('TopX')[0]"}, "domainMin": -1, "scheme": "greens"},
+                "legend": null
+              },
+              "tooltip": [
+                {"field": "States", "type": "nominal", "title": "State"},
+                {"field": "Amount", "type": "quantitative", "title": "Amount"}
+              ]
+            }
+          }]
+    }
+    ]
+        }
+    ],
+"config": {"background": "#ecb5b5", "view": {"stroke": "transparent"}}
+}
