@@ -1,7 +1,7 @@
 html,
 
 body {
-    background-color: #ccecb5;
+    background-color: #ecb5b5;
     margin-left: 25px;
     margin-right: 25px;
     margin-top: 0px;
@@ -13,14 +13,14 @@ header {
     z-index: 1000;
     font-size: 20px;
     font-weight: bold;
-    background-color: #107937;
+    background-color: #791010;
     height: 100px;
     border-radius: 50px;
     align-content: center;
     margin-top: 50px;
     padding: 0px 0;
     padding-left: 40px;
-    color: #ccecb5;
+    color: #ecb5b5;
     margin-bottom: 50px
 }
 
