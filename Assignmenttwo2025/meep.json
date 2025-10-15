@@ -50,5 +50,133 @@
           "name": "Range to view: "
         }
       }
+<<<<<<< HEAD
     ]
 }
+=======
+    ],
+    "data": {
+          "url":
+          "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/blob/main/Assignmenttwo2025/js/MapOfAustralia.json",
+          "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA94"}
+        },
+        "spacing": 50,
+        "padding": 0,
+
+    "vconcat": [
+        {
+            "center": true,
+            "bounds": "full",
+    "hconcat": [{
+        "projection": {"type": "equirectangular"},
+        "title": {"text": "Which flight routes are busiest?", "align": "center","fontSize": 24, "color": "#791010"},
+        "height": 400,
+        "width": 400,
+        "layer": [
+            {
+                "mark": {
+                    "type": "geoshape",
+                    "fill": "#e6baba"
+                  }
+        }
+          {
+            "data": {
+              "url": "https://raw.githubusercontent.com/BCohen7/assignment/refs/heads/main/assignmenttwo/data/courses.csv"},
+            "transform": [
+              {
+                "filter": "State_Select == null || datum.State == State_Select" 
+              },
+              {
+                "filter": "datum.Rank < XSelect + 1"
+              }
+            ],
+            "mark": {"type": "circle", "opacity": 0.5, "size": 1},
+            "encoding": {
+              "longitude": {"field": "Longitude", "type": "quantitative"},
+              "latitude": {"field": "Latitude", "type": "quantitative"},
+              "size": {"value": 40},
+              "color": {"value": "black"},
+              "tooltip": [{"field": "Course", "type": "nominal", "title": "Course"}, {"field": "Rank", "type": "quantitative"}]
+            }
+          }]
+    }
+    ]
+        },
+        {
+    "height": 120,
+    "width": "container",
+    "title": {"text": "WHICH COURSES ARE PUBLIC AND WHICH ARE PRIVATE", "align": "center","fontSize": 24, "color": "#107937"},
+    "data": {
+        "url": "https://raw.githubusercontent.com/BCohen7/assignment/refs/heads/main/assignmenttwo/data/courses.csv"},
+    "transform": [{
+        "filter": {                
+            "field": "Rank",
+            "lte": {"expr": "XSelect"}
+            }
+        }    
+    ],
+    "layer": [{
+    "mark": {"type": "bar", "cornerRadius": 60},
+  
+    "encoding": {
+        "x": {
+            "aggregate": "count",
+            "type": "quantitative",
+            "scale": {"domainMax": {"expr": "XSelect"}},
+            "title": null, "axis": {"labels": false, "grid": false, "tickOpacity": 0, "domain": false}},
+        "y": {
+            "field": "course",
+            "type": "ordinal",
+            "title": null, "axis": {"labels": false, "grid": false, "tickOpacity": 0, "domain": false}},
+        "color": {
+            "field": "PrivPub",
+            "type": "nominal",
+            "legend": null,
+            "scale": {"range": ["#107937", "#a28947"]}
+        }
+    }
+},
+{
+    "transform": [{
+        "aggregate": [{
+            "op": "count",
+            "as": "myCount",
+            "field": "PrivPub"
+        }],
+        "groupby": ["PrivPub"]
+    },
+{
+    "filter": "datum.PrivPub == 'Private' "
+}],
+    "mark": {"type": "text", "align": "center", "dx": -20, "fontSize": 20, "fontWeight": "bold", "color": "#ccecb5"},
+    "encoding": {
+        "x": {"field": "myCount", "type": "quantitative", "title": null, "axis": {"labels": false, "grid": false, "tickOpacity": 0, "domain": false}},
+        "text": {"field": "myCount"}
+    }
+},
+{
+    "transform": [{
+        "aggregate": [{
+            "op": "count",
+            "as": "myCount",
+            "field": "PrivPub"
+        }],
+        "groupby": ["PrivPub"]
+    },
+{
+    "filter": "datum.PrivPub == 'Public' "
+},
+{
+    "calculate": "XSelect - datum.myCount", "as": "xplot"
+}],
+    "mark": {"type": "text", "align": "center", "dx": 20, "fontSize": 20, "fontWeight": "bold", "color": "#ecb5b5"},
+    "encoding": {
+        "x": {"field": "xplot", "type": "quantitative", "title": null, "axis": {"labels": false, "grid": false, "tickOpacity": 0, "domain": false}},
+        "text": {"field": "myCount"}
+    }
+}]
+        }
+    ],
+"config": {"background": "#ccecb5", "view": {"stroke": "transparent"}}
+}
+>>>>>>> 46024ecb70b3ce5effa3a97c1368bc941a01122c
