@@ -2,14 +2,39 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 800,
     "height": 450,
-    "projection": {"type": "equirectangular"},
     "layer": [
+      {
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white", "strokeWidth": 0.5},
+        "projection": {"type": "equirectangular"},
+        "data": {
+        "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/js/STE_2021_AUST_GDA94.json",
+        "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA94"}
+        }
+      },
+      {
+        "mark": {"type": "circle", "color": "black"},
+        "projection": {"type": "equirectangular"},
+        "data": {
+          "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/airportlocations.csv"
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"}
+      }
+    },
+    {
+      "transform": [
+        {"filter": {"field": "origin", "equal": "dep_city"}},
         {
-          "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white", "strokeWidth": 0.5},
-          "data": {
-            "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/js/STE_2021_AUST_GDA94.json",
-            "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA94"}
+          "lookup": "dep_city",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/airportlocations.csv"
+            },
+            "key": "iata"
           }
         }
-      ]       
+      ]
     }
+  ]       
+}
