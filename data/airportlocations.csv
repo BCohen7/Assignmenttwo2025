@@ -1,4 +1,4 @@
-airport,longitude,latitude
+airport,latitude,longitude
 Adelaide,-34.948,138.533
 Albury,-36.067,146.959
 Alice Springs,-23.807,133.903
@@ -9,10 +9,10 @@ Cairns,-16.879,145.749
 Canberra,-35.307,149.195
 Coffs Harbour,-30.321,153.116
 Darwin,-12.415,130.882
-Devonport,-41.170,146.430
+Devonport,-41.17,146.43
 Dubbo,-32.217,148.575
 Emerald,-23.567,148.179
-Gladstone,-23.870,151.225
+Gladstone,-23.87,151.225
 Gold Coast,-28.166,153.507
 Hamilton Island,-20.358,148.952
 Hobart,-42.837,147.513
@@ -25,12 +25,12 @@ Mildura,-34.229,142.086
 Mount Isa,-20.666,139.488
 Newcastle,-32.795,151.834
 Newman,-23.418,119.803
-Perth,-31.940,115.967
+Perth,-31.94,115.967
 Port Hedland,-20.378,118.626
-Port Lincoln,-34.605,135.880
+Port Lincoln,-34.605,135.88
 Port Macquarie,-31.436,152.863
 Proserpine,-20.399,148.586
-Rockhampton,-23.380,150.475
+Rockhampton,-23.38,150.475
 Sunshine Coast,-26.593,153.083
 Sydney,-33.946,151.177
 Townsville,-19.253,146.767
