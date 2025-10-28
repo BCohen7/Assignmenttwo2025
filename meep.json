@@ -10,6 +10,11 @@
             "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA94"}
           },
           "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white", "strokeWidth": 0.5}
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/airportlocations.csv"
+          }
         }
       ]       
     }
