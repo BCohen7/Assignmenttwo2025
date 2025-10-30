@@ -14,9 +14,9 @@
     <link rel = "stylesheet" href="assignmenttwo/css/styles.css">
     
     <!-- Vega-lite format pull-->
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
 </head>
 
 <body>
@@ -59,7 +59,7 @@ var xFunction;
 var pullOne = "Assignmenttwo2025/meep.json"; // Import the map to be sent to figure
 
 // Once the map has been inserted to the HTML, we can pull its view to inspect for any X filter
-vegaEmbed('#vis1', pullOne, {"actions": false})
+vegaEmbed('#vis1', pullOne)
 
     </script>
 </body>
