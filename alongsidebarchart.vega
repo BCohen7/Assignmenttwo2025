@@ -1,0 +1,41 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+    "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"},
+    "height": 400,
+    "config": {"view": {"stroke": null}},
+    "encoding": {
+        "y": {"field": "Airline", "type": "ordinal", "sort": {"field": "Hello", "order": "descending"}, "axis": {"grid": false, "labels": false, "domain": false, "ticks": false, "title": null}},
+        "color":{"field": "Airline", "scale": {"domain": ["Qantas", "QantasLink", "Virgin Australia", "Virgin Australia Regional Airlines", "Rex Airlines", "Bonza", "Jetstar"], "range": ["#DF0000", "#DF0000", "#4F145B", "#4F145B", "#004A86", "#743CBC", "#FF5115"]}, "legend": null}
+    },
+          "transform": [
+        {
+          "filter": {"field": "Month", "equal": "January"}
+        },
+        {
+        "aggregate": [{
+          "op": "count",
+          "field": "Airline",
+          "as": "Hello"
+        }],
+        "groupby": ["Airline"]
+        },
+        {
+          "calculate": "datum.Airline + ' had ' + datum.Hello + ' flights'", "as": "text"
+        },{
+            "calculate": "split(datum.text, 'had')", "as": "text2"
+        }],
+    "layer": [
+    {
+        "mark": {"type": "bar", "width": {"band": 0.8}, "height": {"band": 0.8}, "cornerRadius": 20},
+        "encoding": {
+            "x": {"field": "Hello", "type": "quantitative", "axis": {"ticks": false, "labels": false, "grid": false, "domain": false}}
+        }
+        },
+        {
+            "mark": {"type": "text", "align": "left", "dx": 8,"fontSize": 12, "fontWeight": 100},
+            "encoding": {
+                "text": {"field": "Airline"},
+                "x": {"field": "Hello", "type": "quantitative"}
+        }
+        }
+    ]}
