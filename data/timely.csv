@@ -1,4 +1,4 @@
-"Route,Departing,Arriving,Airline,Month,Scheduled,Flown,Cancelled,OnTimeDeparture,OnTimeArrivals,DelayedDeparture,DelayedArrival,CancellationRate,LateDRate,LateARate",Departing,Arriving,Airline,Month,Scheduled,Flown,Cancelled,OTD,OTA,DD,DA
+Route,Departing,Arriving,Airline,Month,Scheduled,Flown,Cancelled,OTD,OTA,DD,DA
 Melbourne-Sunshine Coast,Melbourne,Sunshine Coast,Bonza,January,14,14,0,7,7,7,7
 Sunshine Coast-Melbourne,Sunshine Coast,Melbourne,Bonza,January,14,14,0,8,8,6,6
 Melbourne-Mildura,Melbourne,Mildura,Bonza,January,9,9,0,2,3,7,6
