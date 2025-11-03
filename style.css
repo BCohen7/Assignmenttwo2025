@@ -25,13 +25,45 @@ h2{
     padding-top: 0px
 }
 
+.paragraph{
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-top: 80px;
+    text-align: center;
+}
+
 .container{
-    height:800px;
+    height:600px;
     padding-top: 100px;
     min-width: 100%;
     font-family: "Roboto", sans-serif;
 }
 
-.space{
-    height: 480px;
+.paragraph2{
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-top: 0px;
+    padding-bottom: 100px;
+    text-align: center;
+}
+
+.middle{
+    max-height: 450px;
+}
+
+.heat{
+    padding-top: 100px;
+}
+
+.bar{
+    padding-top: 0px;
+    padding-bottom: 150px;
+}
+
+.metadata{
+    padding-top: 100px
 }

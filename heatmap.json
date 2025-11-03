@@ -4,7 +4,6 @@
     "height": 300,
     "width": 480,
     "background": "transparent",
-    "title": "Percentage of Flights to successfully depart",
     "config": {"view": {"stroke": null}, "font": "Momo Trust Display"},
     "transform":[{
         "filter": "datum.Month != 'Year'"
