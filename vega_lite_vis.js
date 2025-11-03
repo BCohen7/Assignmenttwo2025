@@ -1,4 +1,4 @@
-var vg_1 = "meep.json";
+var vg_1 = "map.json";
 
 vegaEmbed("#map", vg_1).then(function(result) {
 

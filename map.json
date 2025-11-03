@@ -1,0 +1,246 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+    "config": {"view": {"stroke": null}, "padding": {"bottom": 0, "left": 0, "right": 0, "top": 0}, "font": "Momo Trust Display"},
+    "bounds": "flush",
+    "background": "transparent",
+    "spacing": 100,
+    "params": [
+      {
+        "name": "Month_Select",
+        "value": "Year",
+        "bind": {
+          "input": "select",
+          "options": [
+            "Year",
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ],
+          "labels": [
+            "Show all",
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ],
+          "name": "Month: "
+        }
+      }
+    ],    
+      "hconcat": [{
+        "layer": [
+      {
+        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white", "strokeWidth": 0.5},
+        "data": {
+        "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/js/STE_2021_AUST_GDA94.json",
+        "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA94"}
+        }
+      },
+    {
+      "mark": {"type": "rule", "fill": "#14213d", "opacity": 0.1, "strokeWidth": 0.3},
+          "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"},
+          "params": [{
+        "name": "orgHover",
+        "select": {
+          "type": "point",
+          "on": "hover",
+          "nearest": false,
+          "fields": ["Departing"]
+        }
+      }],
+      "transform": [
+      {"filter": {"param": "org", "empty": false}},
+      {
+        "lookup": "Departing",
+        "from": {
+          "data": {
+            "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/airportlocations.csv"
+      },
+      "key": "airport",
+      "fields": ["latitude", "longitude"]
+          }
+        },
+        {
+         "lookup": "Arriving",
+        "from": {
+          "data": {
+            "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/airportlocations.csv"
+      },
+      "key": "airport",
+      "fields": ["latitude", "longitude"]
+          },
+          "as": ["dest_latitude", "dest_longitude"]
+        }
+      ],
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "longitude2": {"field": "dest_longitude"},
+        "latitude2": {"field": "dest_latitude"},
+        "tooltip": {"field": "Destination"}
+      }
+    },
+      { 
+        "mark": {"type": "circle", "opacity": 0.3},
+        "data": {
+          "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"
+      },
+      "transform": [
+        {
+          "lookup": "Departing",
+          "from": {
+            "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/airportlocations.csv"},
+            "key": "airport",
+            "fields": ["latitude", "longitude"]
+          }
+        }
+      ],
+        "params": [{
+        "name": "org",
+        "select": {
+          "type": "point",
+          "on": "click",
+          "nearest": true,
+          "fields": ["Departing"]
+        }
+      }
+      ],
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "color": {
+          "value": "#14213d"
+        },
+        "size": {"value": 75,"condition": {
+          "param": "org", "value": 200, "empty": false}
+      }
+    }
+    },{ 
+        "mark": {"type": "circle"},
+        "data": {
+          "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"
+      },
+      "transform": [
+        {
+          "lookup": "Departing",
+          "from": {
+            "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/airportlocations.csv"},
+            "key": "airport",
+            "fields": ["latitude", "longitude"]
+          }
+        }
+      ],
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "color": {
+          "condition": {"test": "datum.Departing == org.Departing", "value": "white"}
+        },
+        "opacity": {"value": 0,"condition": {
+          "param": "org", "value": 1, "empty": false}
+        },
+        "size": {"value": 75}
+      }
+    }
+  ],
+  "projection": {"type": "equirectangular"},
+  "width": 800,
+  "height": 500
+      },
+      {
+    "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"},
+    "height": 400, "width": 400,
+    "encoding": {
+        "y": {"field": "Airline", "type": "ordinal", "sort": {"field": "Hello"}, "axis": {"grid": false, "labels": false, "domain": false, "ticks": false, "title": null}},
+        "color":{"field": "Airline", "scale": {"domain": ["Qantas", "QantasLink", "Virgin Australia", "Virgin Australia Regional Airlines", "Rex Airlines", "Bonza", "Jetstar"], "range": ["#DF0000", "#DF0000", "#4F145B", "#4F145B", "#004A86", "#743CBC", "#FF5115"]}, "legend": null}
+    },
+    "layer": [
+      {
+        "mark": {"type": "text", "opacity": 1, "align": "right", "dx": -10},
+        "transform": [{
+          "aggregate": [{
+            "op": "count",
+            "field": "Airline",
+            "as": "Airline2"
+          }],
+          "groupby": ["Airline"]
+        }],
+        "encoding": {
+            "text": {"field": "Airline"},
+            "x": {"value": 0}
+        }
+        },
+    {
+        "mark": {"type": "bar", "width": {"band": 0.8}, "height": {"band": 0.8}, "cornerRadius": 20},
+            "transform": [
+        {
+            "filter": "datum.Month == Month_Select"
+        },
+        {
+            "filter": {"param": "org"}
+        },
+        {
+        "aggregate": [{
+          "op": "sum",
+          "field": "Scheduled",
+          "as": "Hello"
+        }],
+        "groupby": ["Airline"]
+        },
+        {
+          "calculate": "datum.Airline + ' had ' + datum.Hello + ' flights'", "as": "text"
+        },
+        {
+            "calculate": "split(datum.text, 'had')", "as": "text2"
+        }],
+        "encoding": {
+            "x": {"field": "Hello", "type": "quantitative", "axis": {"ticks": true, "labels": true, "grid": false, "labelAngle": -45, "domain": false, "title": "Flights each year"}}}
+        },
+        {
+        
+                "transform": [
+        {
+            "filter": "datum.Month == Month_Select"
+        },
+        {
+            "filter": {"param": "org"}
+        },
+        {
+        "aggregate": [{
+          "op": "sum",
+          "field": "Airline",
+          "as": "Hello"
+        }],
+        "groupby": ["Airline"]
+        },
+        {
+          "calculate": "datum.Airline +'-'+ datum.Hello+'  flights'", "as": "text"
+        },{
+            "calculate": "split(datum.text, '-')", "as": "text2"
+        }],
+         "mark": {"type": "text", "align": "left", "dx": 8, "dy":-5,"fontSize": 12, "fontWeight": 100, "width": 100},
+            "encoding": {
+                "text": {"field": "text2"},
+                "x": {"field": "Hello", "type": "quantitative", "axis": {"ticks": false, "labels": false, "grid": false, "domain": false}}
+      }
+        }  
+    ]}
+]
+    }

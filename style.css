@@ -1,0 +1,37 @@
+body{
+    background-color: #f8f9fa;
+    font-family: "Roboto", sans-serif;
+}
+
+.header{
+    color: #f8f9fa;
+    font-family: "Momo Trust Display", sans-serif;
+    font-size: 24px;
+    background-color: #14213d;
+    border-radius: 20px;
+    padding-left: 50px;
+    height: 200px;
+    padding-bottom: 40px;
+}
+
+h1{
+    font-size: 72px;
+    padding-top: 24px;
+    padding-bottom: 0px
+}
+
+h2{
+    font-size: 36px;
+    padding-top: 0px
+}
+
+.container{
+    height:800px;
+    padding-top: 100px;
+    min-width: 100%;
+    font-family: "Roboto", sans-serif;
+}
+
+.space{
+    height: 480px;
+}

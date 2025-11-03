@@ -1,0 +1,45 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+    "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"},
+    "height": 300,
+    "width": 480,
+    "background": "transparent",
+    "title": "Percentage of Flights to successfully depart",
+    "config": {"view": {"stroke": null}, "font": "Momo Trust Display"},
+    "transform":[{
+        "filter": "datum.Month != 'Year'"
+    },    
+    {
+        "calculate": "datum.Airline == 'Qantas' || datum.Airline == 'QantasLink' ?  'hsl(0, 100%, ' : datum.Airline == 'Virgin Australia' || datum.Airline == 'Virgin Australia Regional Airlines' ?  'hsl(290, 64%, ' : datum.Airline == 'Rex Airlines' ? 'hsl(207, 100%, ' : datum.Airline == 'Bonza' ? 'hsl(266, 52%, ' : datum.Airline == 'Jetstar' ? 'hsl(15, 100%, ' : 'end'",
+        "as": "ColorCodeFront" 
+    },
+    {
+        "calculate": "datum.Airline == 'Qantas' || datum.Airline == 'QantasLink' ?  44 : datum.Airline == 'Virgin Australia' || datum.Airline == 'Virgin Australia Regional Airlines' ?  22 : datum.Airline == 'Rex Airlines' ? 26 : datum.Airline == 'Bonza' ? 49 : datum.Airline == 'Jetstar' ? 54 : 'end'",
+        "as": "SatCode" 
+    },
+    {
+        "calculate": "datum.Flown/datum.Scheduled", "as": "op1"
+    },
+    {
+        "calculate": "(3.6)*(datum.op1 - 0.75) + 0.1", "as": "op2"
+    },
+    {
+        "calculate": "datum.SatCode - 100", "as": "constSat"
+    },
+    {
+        "calculate": "datum.constSat*datum.op2 + 100", "as": "fStat"
+    },
+    {
+        "calculate": "datum.ColorCodeFront + datum.fStat + '%'", "as": "colString"
+    }
+    ],
+    "layer": [{
+        "mark": {"type": "rect", "width": {"band": 0.8}, "height": {"band": 0.8}},
+        "encoding": {
+            "x": {"field": "Month", "type": "ordinal", "sort": {"field": "monthID"}},
+            "y": {"field": "Airline", "type": "nominal"},
+            "tooltip": {"field": "op1", "format": ".0%", "type": "quantitative", "title": "Flights to take-off as planned"},
+            "color": {"value": {"expr": "datum.colString"}}
+    }
+}]
+}

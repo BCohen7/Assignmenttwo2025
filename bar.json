@@ -1,6 +1,10 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
     "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"},
+    "width": 480,
+    "height": 300,
+    "background": "transparent",
+    "config": {"font": "Momo Trust Display"},
     "transform":[{
         "filter": {"field": "Month", "equal": "Year"}
     },
@@ -19,7 +23,7 @@
     }
     ],
     "encoding": {
-        "x": {"field": "Airline", "type": "ordinal", "sort": {"field": "LeBron", "op":"average"}, "axis": {"labels": true, "title": null, "ticks": false}},
+        "x": {"field": "Airline", "type": "ordinal", "sort": {"field": "LeBron", "op":"average"}, "axis": {"labels": true, "labelAngle": -45, "title": null, "ticks": false}},
         "color":{"field": "Airline", "scale": {"domain": ["Qantas", "QantasLink", "Virgin Australia", "Virgin Australia Regional Airlines", "Rex Airlines", "Bonza", "Jetstar"], "range": ["#DF0000", "#DF0000", "#4F145B", "#4F145B", "#004A86", "#743CBC", "#FF5115"]}, "legend": null}
     },
     "layer": [
@@ -32,7 +36,7 @@
         {
             "mark": {"type": "bar", "width": {"band": 0.4}, "cornerRadiusTopLeft": 20, "cornerRadiusTopRight": 20, "opacity": 0.6},
             "encoding": {
-                "y": {"field": "Flowns", "type": "quantitative"},
+                "y": {"field": "Flowns", "type": "quantitative", "axis": {"title": "Scheduled vs Departed Flights"}},
                 "tooltip": {"field": "Flowns"}
             }
         }

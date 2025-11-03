@@ -9,7 +9,7 @@
         }
       },
     {
-      "mark": {"type": "rule", "fill": "black", "opacity": 0.3, "strokeWidth": 0.3},
+      "mark": {"type": "rule", "fill": "#494947", "opacity": 0.1, "strokeWidth": 0.3},
           "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"},
       "transform": [
       {"filter": {"param": "org", "empty": false}},
@@ -43,7 +43,7 @@
       }
     },
       { 
-        "mark": {"type": "circle", "opacity": 1},
+        "mark": {"type": "circle", "opacity": 0.3},
         "data": {
           "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"
       },
@@ -62,18 +62,49 @@
         "select": {
           "type": "point",
           "on": "click",
-          "nearest": false,
+          "nearest": true,
           "fields": ["Departing"]
         }
       }],
       "encoding": {
         "longitude": {"field": "longitude"},
         "latitude": {"field": "latitude"},
-        "size": {"value": 100}
+        "color": {
+          "value": "#494947"
+        },
+        "size": {"value": 75,"condition": {
+          "param": "org", "value": 200, "empty": false}
+      }
+    }
+    },{ 
+        "mark": {"type": "circle"},
+        "data": {
+          "url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"
+      },
+      "transform": [
+        {
+          "lookup": "Departing",
+          "from": {
+            "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/airportlocations.csv"},
+            "key": "airport",
+            "fields": ["latitude", "longitude"]
+          }
+        }
+      ],
+      "encoding": {
+        "longitude": {"field": "longitude"},
+        "latitude": {"field": "latitude"},
+        "color": {
+          "condition": {"test": "datum.Departing == org.Departing", "value": "white"}
+        },
+        "opacity": {"value": 0,"condition": {
+          "param": "org", "value": 1, "empty": false}
+        },
+        "size": {"value": 75}
       }
     }
   ],
   "projection": {"type": "equirectangular"},
-  "width": 800,
-  "height": 450
+  "width": 1000,
+  "height": 500
 }

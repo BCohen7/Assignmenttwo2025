@@ -1,0 +1,41 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+    "data": {"url": "https://raw.githubusercontent.com/BCohen7/Assignmenttwo2025/refs/heads/main/data/timely.csv"},
+    
+    "transform":[{
+        "filter": {"field": "Month", "equal": "Year"}
+    },
+    {
+        "aggregate": [{
+            "op": "sum",
+            "field": "Scheduled",
+            "as": "LeBron"
+        },
+        {
+            "op": "sum",
+            "field": "Flown",
+            "as": "Flowns"
+        }],
+        "groupby": ["Airline"]
+    }
+    ],
+    "encoding": {
+        "x": {"field": "Airline", "type": "ordinal", "sort": {"field": "LeBron", "op":"average"}, "axis": {"labels": true, "title": null, "ticks": false}},
+        "color":{"field": "Airline", "scale": {"domain": ["Qantas", "QantasLink", "Virgin Australia", "Virgin Australia Regional Airlines", "Rex Airlines", "Bonza", "Jetstar"], "range": ["#DF0000", "#DF0000", "#4F145B", "#4F145B", "#004A86", "#743CBC", "#FF5115"]}, "legend": null}
+    },
+    "layer": [
+        {
+            "mark": {"type": "bar", "width": {"band": 0.8}, "cornerRadiusTopLeft": 20, "cornerRadiusTopRight": 20, "opacity": 0.2},
+            "encoding": {
+                "y": {"field": "LeBron", "type": "quantitative", "stack": true}
+            }
+        },
+        {
+            "mark": {"type": "bar", "width": {"band": 0.4}, "cornerRadiusTopLeft": 20, "cornerRadiusTopRight": 20, "opacity": 0.6},
+            "encoding": {
+                "y": {"field": "Flowns", "type": "quantitative"},
+                "tooltip": {"field": "Flowns"}
+            }
+        }
+    ]
+}
